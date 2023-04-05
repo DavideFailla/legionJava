@@ -160,6 +160,16 @@ public class CSVFileCourseRepository implements CourseRepository {
         return false;
     }
 
+    @Override
+    public List<Course> findByTitleAndStatus(String part, boolean status) throws DataException {
+        return null;
+    }
+
+    @Override
+    public List<Course> findByTitleStatusAndMinEditions(String part, boolean status, int minEditions) throws DataException {
+        return null;
+    }
+
     public String courseToCSV(Course c){                //trasforma i dati presenti dell'oggetto in una stringa(che poi scriveremo sul file)
         return String.format(Locale.US,CSV_COURSE,c.getId(),c.getTitle()
                 ,c.getDescription(),c.getProgram(),c.getDuration(),c.isActive(),c.getCreatedAt());

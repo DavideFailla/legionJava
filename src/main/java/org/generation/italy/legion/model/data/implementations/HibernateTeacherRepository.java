@@ -10,22 +10,19 @@ import org.springframework.stereotype.Repository;
 
 import static org.generation.italy.legion.model.data.HibernateConstants.*;
 
-@Repository
-@Profile("hibernate")
-public class HibernateTeacherRepository extends GenericCrudRepository<Teacher> implements TeacherRepository {
+
+public class HibernateTeacherRepository extends GenericCrudRepository<Teacher>{
 
     public HibernateTeacherRepository(Session session) {
         super(session, Teacher.class);
     }
 
-    @Override
-    public Iterable<Teacher> findWithCompetenceByLevel(Level teacherLevel) throws DataException {
+    public Iterable<Teacher> findByLevel(Level teacherLevel) throws DataException {
         return session.createSelectionQuery(HQL_FIND_TEACHER_BY_LEVEL, Teacher.class)
                 .setParameter("level", teacherLevel).list();
 
     }
 
-    @Override
     public Iterable<Teacher> findWithSkillAndLevel(long idSkill, Level competenceLevel) {
         return session.createSelectionQuery(HQL_FIND_TEACHER_BY_SKILL_LEVEL, Teacher.class)
               .setParameter("level", competenceLevel)
@@ -36,5 +33,4 @@ public class HibernateTeacherRepository extends GenericCrudRepository<Teacher> i
         return session.createSelectionQuery(HQL_FIND_TEACHERS_BY_COURSE_EDITION, Teacher.class)
               .setParameter("n", n).list();
     }
-
 }

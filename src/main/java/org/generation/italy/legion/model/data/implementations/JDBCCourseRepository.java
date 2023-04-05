@@ -220,6 +220,16 @@ public class JDBCCourseRepository implements CourseRepository {
         return false;
     }
 
+    @Override
+    public List<Course> findByTitleAndStatus(String part, boolean status) throws DataException {
+        return null;
+    }
+
+    @Override
+    public List<Course> findByTitleStatusAndMinEditions(String part, boolean status, int minEditions) throws DataException {
+        return null;
+    }
+
 
     private Course databaseToCourse(ResultSet rs) throws SQLException {
         try {
