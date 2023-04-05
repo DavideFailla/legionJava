@@ -1,17 +1,13 @@
 package org.generation.italy.legion.dtos;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import org.generation.italy.legion.model.entities.Course;
-import org.generation.italy.legion.model.entities.CourseEdition;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.stream.StreamSupport;
 
 public class CourseDto {
     private long id;
@@ -32,6 +28,15 @@ public class CourseDto {
         this.createdAt = createdAt;
     }
 
+    public static CourseDto fromEntity(Course c){
+        return new CourseDto(c.getId(),c.getTitle(),c.getDescription(),c.getProgram(),
+                c.getDuration(),c.isActive(),c.getCreatedAt().toString());
+    }
+
+    public static Iterable<CourseDto> fromEntityIterable(Iterable<Course> c){
+        return StreamSupport.stream(c.spliterator(), false)
+                .map(s -> CourseDto.fromEntity(s)).toList();
+    }
     public long getId() {
         return id;
     }
@@ -86,18 +91,5 @@ public class CourseDto {
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public static CourseDto fromEntity(Course c){
-        return new CourseDto(c.getId(),c.getTitle(), c.getDescription(),c.getProgram(), c.getDuration(),
-                c.isActive(),c.getCreatedAt().toString());
-    }
-
-    public static List<CourseDto> fromEntityList(List<Course> list){
-        List<CourseDto> dtoList = new ArrayList<>();
-        for (Course c : list){
-            dtoList.add(CourseDto.fromEntity(c));
-        }
-        return dtoList;
     }
 }

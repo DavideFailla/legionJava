@@ -161,12 +161,17 @@ public class CSVFileCourseRepository implements CourseRepository {
     }
 
     @Override
-    public List<Course> findByTitleAndStatus(String part, boolean status) throws DataException {
+    public Iterable<Course> findByTitleWhenActiveAndMinEdition(String part, boolean status, int minEditions) throws DataException {
         return null;
     }
 
     @Override
-    public List<Course> findByTitleStatusAndMinEditions(String part, boolean status, int minEditions) throws DataException {
+    public Iterable<Course> findByTitleWhenActive(String part, boolean status) throws DataException {
+        return null;
+    }
+
+    @Override
+    public Iterable<Course> findByTitleAndMinEdition(String part, int minEditions) throws DataException {
         return null;
     }
 

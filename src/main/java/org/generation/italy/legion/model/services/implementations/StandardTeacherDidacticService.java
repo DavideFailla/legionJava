@@ -48,7 +48,7 @@ public class StandardTeacherDidacticService implements AbstractCrudDidacticServi
 
     @Override
     public void update(Teacher entity) throws EntityNotFoundException, DataException {
-        repo.save(entity);
+        repo.save(entity); // se esiste, fa l'update
     }
 
     @Override

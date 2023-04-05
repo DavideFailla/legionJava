@@ -143,6 +143,7 @@ public abstract class Person {
     }
 
     public Optional<Competence> getCompetenceForSkill(long idSkill){
-        return competences.stream().filter(c -> c.getSkill().getId() == idSkill).findFirst();
+        return competences.stream().filter(c->c.getSkill().getId() == idSkill).findFirst();
     }
+
 }

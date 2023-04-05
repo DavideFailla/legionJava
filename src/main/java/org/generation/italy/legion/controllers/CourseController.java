@@ -24,22 +24,27 @@ public class CourseController {
     }
 
     @GetMapping("/home")
-    public String home(){
-            return "home";
+    public String home() {
+        return "home";
     }
 
     @GetMapping("/findCourseByTitleLike")
-    public String findCourseByTitleLike(){
+    public String findCourseByTitleLike() {
+        return "find_course_by_title_like";
+    }
+
+    @GetMapping("/findTeacherWithSkillAndLevel")
+    public String findTeacherCourseByTitleLike() {
         return "find_course_by_title_like";
     }
 
     @GetMapping("/showCourseInsertForm")
-    public String showForm(Course c){
+    public String showForm(Course c) {
         return "insert_course";
     }
 
     @GetMapping("/index")
-    public String showCourses(Model m){  // Model è un oggetto che trasferisce dati tra il Controller e la View
+    public String showCourses(Model m) {  // Model è un oggetto che trasferisce dati tra il Controller e la View
         try {
             Iterable<Course> courseList = service.findAll();
             m.addAttribute("courses", courseList);
@@ -50,8 +55,9 @@ public class CourseController {
             return "error";
         }
     }
+
     @GetMapping("/findCourseById")
-    public String findById(Model m, long courseId){
+    public String findById(Model m, long courseId) {
         try {
             Optional<Course> c = service.findById(courseId);
             Course found = c.orElse(new Course());
@@ -65,8 +71,8 @@ public class CourseController {
     }
 
     @GetMapping("/saveCourse")
-    public String insertCourse(Model m, @Valid Course c, BindingResult result){
-        if (result.hasErrors()){
+    public String insertCourse(Model m, @Valid Course c, BindingResult result) {
+        if (result.hasErrors()) {
             return "insert_course";
         }
         try {
@@ -80,7 +86,7 @@ public class CourseController {
     }
 
     @GetMapping("/findCoursesByTitleContains")
-    public String findCoursesByTitleContains(Model m, String part){
+    public String findCoursesByTitleContains(Model m, String part) {
         try {
             List<Course> courseList = service.findCoursesByTitleContains(part);
             m.addAttribute("courses", courseList);

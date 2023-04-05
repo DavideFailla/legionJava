@@ -81,18 +81,18 @@ class HibernateTeacherRepositoryTest {
             assertEquals(t1.getId(), tc.get(0).getId());
             assertEquals(2, tc.get(0).getCompetences().size());
             Optional<Competence> oc1 = tc.get(0).getCompetences()
-                  .stream()
-                  .filter(c-> c.getId() == co1.getId())
-                  .findFirst();
+                    .stream()
+                    .filter(c-> c.getId() == co1.getId())
+                    .findFirst();
             assertTrue(oc1.isPresent());
             Competence co1Result = oc1.get();
             assertEquals(Level.ADVANCED, co1Result.getLevel());
             assertNotNull(co1Result.getSkill());
             assertEquals(SKILL1_NAME, co1Result.getSkill().getName());
             Optional<Competence> oc2 = tc.get(0).getCompetences()
-                  .stream()
-                  .filter(c-> c.getId() == co2.getId())
-                  .findFirst();
+                    .stream()
+                    .filter(c-> c.getId() == co2.getId())
+                    .findFirst();
             assertTrue(oc2.isPresent());
             Competence co2Result = oc2.get();
             assertEquals(Level.INTERMEDIATE, co2Result.getLevel());
@@ -111,8 +111,8 @@ class HibernateTeacherRepositoryTest {
         assertTrue(tc.size() == 1);
         assertEquals(t1.getId(), tc.get(0).getId());
         Optional<Competence> competenceFound = tc.get(0).getCompetences()
-              .stream()
-              .filter(c-> c.getLevel() == Level.ADVANCED && c.getSkill().getId() == skill1.getId()
+                .stream()
+                .filter(c-> c.getLevel() == Level.ADVANCED && c.getSkill().getId() == skill1.getId()
                         && c.getSkill().getName().equals(skill1.getName())).findFirst();
         assertTrue(competenceFound.isPresent());
     }

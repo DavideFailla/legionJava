@@ -17,9 +17,10 @@ import static org.generation.italy.legion.model.data.JDBCTeacherConstants.FIND_T
 
 @Repository
 @Profile("jdbc")
-public class JDBCTeacherRepository{
+public class JDBCTeacherRepository {
     private Connection con;
     public JDBCTeacherRepository(Connection con) {this.con = con;}
+
     public Iterable<Teacher> findByLevel(Level teacherLevel) throws DataException {
         try(PreparedStatement ps = con.prepareStatement(FIND_TEACHER_BY_LEVEL)) {
             ps.setObject(1, teacherLevel, Types.OTHER);
@@ -35,6 +36,7 @@ public class JDBCTeacherRepository{
         }
     }
 
+
     public Iterable<Teacher> findWithSkillAndLevel(long idSkill, Level competenceLevel) {
         return null;
     }
@@ -43,21 +45,26 @@ public class JDBCTeacherRepository{
         return null; // da scrivere ma c'è il barbatrucco
     }
 
-    public List<Teacher> findAll() throws DataException {
-        return null;
-    }
 
     public Optional<Teacher> findById(long id) throws DataException {
         return Optional.empty();
     }
 
+
+    public List<Teacher> findAll() throws DataException {
+        return null;
+    }
+
+
     public Teacher create(Teacher entity) throws DataException {
         return null;
     }
 
+
     public void update(Teacher entity) throws EntityNotFoundException, DataException {
 
     }
+
 
     public void deleteById(long id) throws EntityNotFoundException, DataException {
 

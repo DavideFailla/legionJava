@@ -84,25 +84,32 @@ public class HibernateCourseRepository extends GenericCrudRepository<Course> imp
     }
     @Override
     public List<Course> findByTitleContains(String part) throws DataException {
-        Query<Course> q = session.createQuery(HQL_FIND_COURSE_BY_TITLE, Course.class);
+        Query<Course> q = session.createQuery("from Course where title like :p", Course.class);
         q.setParameter("p", "%" + part + "%");
+        return q.list();
+    }
+    @Override
+    public Iterable<Course> findByTitleWhenActiveAndMinEdition(String part, boolean status, int minEditions) throws DataException {
+        Query<Course> q = session.createQuery(HQL_FIND_BY_TITLE_LIKE_WHEN_ACTIVE_AND_MIN_EDITION, Course.class);
+        q.setParameter("part", "%" + part + "%");
+        q.setParameter("status", status);
+        q.setParameter("minEditions", minEditions);
         return q.list();
     }
 
     @Override
-    public List<Course> findByTitleAndStatus(String part, boolean status) {
-        Query<Course> q =session.createQuery(HQL_FIND_COURSE_BY_TITLE_STATUS, Course.class);
-        q.setParameter("p", "%" + part + "%");
+    public Iterable<Course> findByTitleWhenActive(String part, boolean status) throws DataException {
+        Query<Course> q = session.createQuery(HQL_FIND_BY_TITLE_LIKE_WHEN_ACTIVE, Course.class);
+        q.setParameter("part", "%" + part + "%");
         q.setParameter("status", status);
         return q.list();
     }
 
     @Override
-    public List<Course> findByTitleStatusAndMinEditions(String part, boolean status, int minEditions){
-        Query<Course> q =session.createQuery(HQL_FIND_COURSE_BY_TITLE_STATUS_MINEDITION, Course.class);
-        q.setParameter("p", "%" + part + "%");
-        q.setParameter("status", status);
-        q.setParameter("editions", minEditions);
+    public Iterable<Course> findByTitleAndMinEdition(String part, int minEditions) throws DataException {
+        Query<Course> q = session.createQuery(HQL_FIND_COURSE_BY_TITLE_LIKE_AND_MIN_EDITION, Course.class);
+        q.setParameter("part", "%" + part + "%");
+        q.setParameter("minEditions", minEditions);
         return q.list();
     }
 }
