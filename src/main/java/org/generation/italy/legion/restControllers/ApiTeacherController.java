@@ -40,7 +40,8 @@ public class ApiTeacherController {
     }
 
     @GetMapping()
-    public ResponseEntity<Iterable<SimpleTeacherDto>> findWithSkillAndLevel(@RequestParam(required = false) Long skillId,@RequestParam(required = false) Level level){
+    public ResponseEntity<Iterable<SimpleTeacherDto>> findWithSkillAndLevel(@RequestParam(required = false) Long skillId,
+                                                                  @RequestParam(required = false) Level level){
         try {
             Iterable<Teacher> teacherIt = service.findWithSkillAndLevel(skillId, level);
             return ResponseEntity.ok().body(SimpleTeacherDto.fromEntityIterable(teacherIt, skillId));

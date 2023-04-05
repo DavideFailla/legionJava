@@ -33,6 +33,8 @@ public class CourseController {
         return "find_course_by_title_like";
     }
 
+
+
     @GetMapping("/showCourseInsertForm")
     public String showForm(Course c){
         return "insert_course";

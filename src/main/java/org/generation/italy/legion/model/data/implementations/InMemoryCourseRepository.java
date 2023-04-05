@@ -138,6 +138,21 @@ public class InMemoryCourseRepository implements CourseRepository {
         }
     }
 
+    @Override
+    public Iterable<Course> findByTitleWhenActiveAndMinEdition(String part, boolean status, int minEditions) throws DataException {
+        return null;
+    }
+
+    @Override
+    public Iterable<Course> findByTitleWhenActive(String part, boolean status) throws DataException {
+        return null;
+    }
+
+    @Override
+    public Iterable<Course> findByTitleAndMinEdition(String part, int minEditions) throws DataException {
+        return null;
+    }
+
 
     @Override
     public void deactivateOldest(int n) {

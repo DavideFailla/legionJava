@@ -8,7 +8,6 @@ import org.generation.italy.legion.model.services.abstractions.AbstractCourseDid
 import org.generation.italy.legion.model.services.abstractions.AbstractCrudDidacticService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -47,6 +46,21 @@ public class StandardCourseDidacticService implements AbstractCrudDidacticServic
         }
         repo.deactivateOldest(actives - numActive);
         return true;
+    }
+
+    @Override
+    public Iterable<Course> findByTitleWhenActiveAndMinEdition(String part, boolean status, int minEditions) throws DataException {
+        return repo.findByTitleWhenActiveAndMinEdition(part,status,minEditions);
+    }
+
+    @Override
+    public Iterable<Course> findByTitleWhenActive(String part, boolean status) throws DataException {
+        return repo.findByTitleWhenActive(part,status);
+    }
+
+    @Override
+    public Iterable<Course> findByTitleAndMinEdition(String part, int minEditions) throws DataException {
+        return repo.findByTitleAndMinEdition(part,minEditions);
     }
 
     @Override

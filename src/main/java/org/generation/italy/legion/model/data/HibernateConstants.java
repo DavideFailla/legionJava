@@ -16,15 +16,23 @@ public class HibernateConstants {
             order by c.createdAt
             limit :limit
             """;
+    public static final String HQL_FIND_COURSE_BY_TITLE_LIKE= """
+                     FROM Course c
+                     WHERE c.title LIKE :part
+            """;
+    public static final String HQL_FIND_BY_TITLE_LIKE_WHEN_ACTIVE_AND_MIN_EDITION = """
+                     FROM Course c
+                     WHERE c.title LIKE :part AND c.active = :status AND size(c.editions) >= :minEditions
+            """;
 
-    public static final String HQL_FIND_COURSE_BY_TITLEPART_AND_ISACTIVE_AND_MINEDITION = """
-        from Course c
-        where c.isActive=true and title = :title AND c in (
-                                                         select ce.course
-                                                         from CourseEdition ce
-                                                         where COUNT(id) = :?)
-        """;
-
+    public static final String HQL_FIND_BY_TITLE_LIKE_WHEN_ACTIVE = """
+                     FROM Course c
+                     WHERE c.title LIKE :part AND c.active = :status
+            """;
+    public static final String HQL_FIND_COURSE_BY_TITLE_LIKE_AND_MIN_EDITION = """
+                     FROM Course c
+                     WHERE c.title LIKE :part AND size(c.editions) >= :minEditions
+            """;
     public static final String HQL_FIND_TEACHER_BY_LEVEL = """
             from Teacher t
             where t.level = :level
@@ -57,6 +65,7 @@ public class HibernateConstants {
 //						FROM edition_module
 //                        GROUP BY id_teacher
 //                        HAVING COUNT (*) = 3)
+
 public static final String HQL_FIND_TEACHERS_BY_COURSE_EDITION = """
        from Teacher t
        where t in (
@@ -65,8 +74,6 @@ public static final String HQL_FIND_TEACHERS_BY_COURSE_EDITION = """
                    group by m.teacher
                    having count (*) = :n)
        """;
-
-
 }
 
 
