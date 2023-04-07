@@ -8,29 +8,35 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class InMemoryCourseEditionRepository {
+public class InMemoryCourseEditionRepository  {
 
     private static Map<Long, CourseEdition> data = new HashMap<>();
+
 
     public double getTotalCost() {
         return data.values().stream().mapToDouble(CourseEdition :: getCost).sum();
     }
 
+
     public Optional<CourseEdition> findMostExpensive() {
         return data.values().stream().max(Comparator.comparingDouble(CourseEdition :: getCost));
     }
+
 
     public double findAverageCost() {
         return getTotalCost() / data.size();
     }
 
+
     public Iterable<Double> findAllDuration() {
         return data.values().stream().map(e -> e.getCourse().getDuration()).toList();
     }
 
+
     public Iterable<CourseEdition> findByCourse(long courseId) {
         return data.values().stream().filter(e -> e.getId()==courseId).toList();
     }
+
 
     public Iterable<CourseEdition> findByCourseTitleAndPeriod(String titlePart,
                                                               LocalDate startAt, LocalDate endAt){
@@ -39,6 +45,7 @@ public class InMemoryCourseEditionRepository {
                                              /*&& e.getStartedAt().isAfter(startAt)
                                              && e.getStartedAt().isBefore(endAt)).toList();*/
     }
+
 
     public Iterable<CourseEdition> findMedian() {
         List <CourseEdition> medianPrice = new ArrayList<>();
@@ -52,6 +59,7 @@ public class InMemoryCourseEditionRepository {
             return medianPrice;
         }
     }
+
 
     public Optional<Double> getCourseEditionCostMode() {
         /*Stream<Course> cs = data.values().stream().filter(e->e.getCost()>1000).map(e->e.getCourse()).distinct();

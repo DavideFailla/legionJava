@@ -25,15 +25,13 @@ public class CourseEditionDto {
         this.cost = cost;
     }
 
-    public static CourseEditionDto fromEntity(CourseEdition ce){
-        return new CourseEditionDto(ce.getId(), ce.getCourse(),ce.getStartedAt().toString(), ce.getCost());
+    public static CourseEditionDto fromEntity(CourseEdition cE){
+        return new CourseEditionDto(cE.getId(), cE.getCourse(),cE.getStartedAt().toString(),cE.getCost());
     }
-
     public static Iterable<CourseEditionDto> fromEntityIterable(Iterable<CourseEdition> cE){
-        return StreamSupport.stream(cE.spliterator(),false)
+        return StreamSupport.stream(cE.spliterator(), false)
                 .map(s -> CourseEditionDto.fromEntity(s)).toList();
     }
-
     public long getId() {
         return id;
     }

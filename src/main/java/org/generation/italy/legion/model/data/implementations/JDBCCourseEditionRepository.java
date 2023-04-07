@@ -17,7 +17,7 @@ import java.util.Optional;
 import static org.generation.italy.legion.model.data.JDBCConstants.*;
 @Repository
 @Profile("jdbc")
-public class JDBCCourseEditionRepository{
+public class JDBCCourseEditionRepository {
 
     private Connection con;
 
@@ -25,9 +25,11 @@ public class JDBCCourseEditionRepository{
         this.con = connection;
     }
 
+
     public double getTotalCost() {
         return 0;
     }
+
 
     public Optional<CourseEdition> findMostExpensive() {
         try (
@@ -43,13 +45,16 @@ public class JDBCCourseEditionRepository{
         }
     }
 
+
     public double findAverageCost() {
         return 0;
     }
 
+
     public Iterable<Double> findAllDuration() {
         return null;
     }
+
 
     public Iterable<CourseEdition> findByCourse(long courseId) {
         try (PreparedStatement ps = con.prepareStatement(FIND_COURSE_EDITION_BY_COURSE)){
@@ -66,6 +71,7 @@ public class JDBCCourseEditionRepository{
             throw new RuntimeException(e);
         }
     }
+
 
     public Iterable<CourseEdition> findByCourseTitleAndPeriod(String titlePart, LocalDate startAt, LocalDate endAt) {
         try (PreparedStatement ps = con.prepareStatement(FIND_COURSE_EDITION_BY_COURSE_TILE_AND_PERIOD)){
@@ -101,9 +107,11 @@ public class JDBCCourseEditionRepository{
         }
     }
 
+
     public Iterable<CourseEdition> findMedian() {
         return null;
     }
+
 
     public Optional<Double> getCourseEditionCostMode() {
         return Optional.empty();
